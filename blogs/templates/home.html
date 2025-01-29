@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block style %}
+    <style>
+        .row {
+            margin-right: 0;
+            margin-left: 0;
+        }
+        
+        .card {
+            max-width: 100%; /* Ensure the card doesn’t overflow */
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        {% for blog in blogs %}
+        <div class="col">
+            <div class="card border-shadow">
+                <img src="{% if blog.coverimage %}{{ blog.coverimage.url}}{% endif %}" class="card-img-top" alt="{{ blog.title }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ blog.title }}</h5>
+                    <p class="card-text">{{ blog.body|truncatewords:20|safe }}</p>
+                    <p class="card-text">{{blog.created_at}}</p>
+                    <a href="{% url 'single_blog' blog.id %}" class="btn btn-primary">Read More</a>
+                    
+                    {% if request.user == blog.author %}
+                        <form action="{% url 'delete_blog' blog.id %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fa fa-trash"></i> Delete
+                            </button>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% if not blogs %}
+        <div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
+            <h1 style="text-align:center;">No blogs found</h1>
+        </div>        
+        {% endif %}
+    </div>
+{% endblock %}

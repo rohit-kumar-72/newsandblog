@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block style %}
+    <style>
+        .container {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        form {
+            max-width: 500px;
+            width: 100%;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <form class="border-shadow" method="POST" action="{% url 'login_user' %}">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" name='username' required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" id="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100 mb-3">Log In</button>
+        <a class="btn btn-outline-primary w-100" href="{% url 'register_user' %}">New User? Register</a>
+        <a href="{% url "forgot_password" %}">forgot password?</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+
+{% block style %}
+<style>
+    .form-container {
+        max-width: 1024px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+    }
+
+    .form-title {
+        text-align: center;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .btn-container {
+        text-align: right; /* Aligns the button to the right */
+    }
+
+    .btn-primary {
+        padding: 10px 20px;
+        background-color: #007bff;
+        border: none;
+        color: white;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    textarea.form-control {
+        height: 200px;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+    <div class="form-container">
+        <h2 class="form-title">Create a New Blog</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <!-- Title -->
+            <label for="title">Blog Title</label>
+            <input type="text" id="title" name="title" class="form-control" placeholder="Enter blog title" required>
+            
+            <!-- Cover Image -->
+            <label for="coverimage">Cover Image</label>
+            <input type="file" id="coverimage" name="coverimage" class="form-control" required>
+        
+            <!-- Body (Rich Text) -->
+            <label for="body">Blog Content</label>
+            <textarea id="body" name="body" class="form-control" placeholder="Write your blog content here" required></textarea>
+            
+            <!-- Submit Button -->
+            <div class="btn-container">
+                <button type="submit" class="btn btn-primary mt-2">Create Blog</button>
+            </div>
+        </form>
+        
+    </div>
+{% endblock %}

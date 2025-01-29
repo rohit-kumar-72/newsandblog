@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <div class="container">
+        {% if article %}
+            <h1>{{ article.title }}</h1>
+            <img src="{{ article.urlToImage }}" alt="{{ article.title }}" class="img-fluid" width="900px" height="600px">
+            <p>{{ article.description }}</p>
+            <p>{{ article.content }}</p>
+            <a href="{{ article.url }}" target="_blank" class="btn btn-primary mb-3">Read Full Article</a>
+        {% else %}
+            <h2>Article not found</h2>
+        {% endif %}
+    </div>
+{% endblock %}
