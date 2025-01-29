@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-qzt+5lkti!oayi=772(+0b2(4tbqgjdy($tm-i#fg#d6o+*^ef
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*','.vercel.app']
 
 
 # Application definition
@@ -78,12 +78,26 @@ WSGI_APPLICATION = 'newsandblog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',  # Database name from the URL
+        'USER': 'postgres.hnqkwibgmfvilrzamcol',  # User from the URL
+        'PASSWORD': 'Rohitraj11@',  # Replace with your actual password
+        'HOST': 'aws-0-ap-south-1.pooler.supabase.com',  # Host from the URL
+        'PORT': '6543',  # Port from the URL
     }
 }
+
+
+
 
 
 # Password validation
